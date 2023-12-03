@@ -2,8 +2,9 @@
 import { Button } from "@/components/Button";
 import InputBox from "@/components/InputBox";
 import { Backend_URL } from "@/lib/Constants";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 type FormInputs = {
   name: string;
@@ -12,6 +13,8 @@ type FormInputs = {
 };
 
 const SignupPage = () => {
+  const {data: session} = useSession();
+
   const register = async () => {
     console.log(data)
     const res = await fetch(Backend_URL + "/auth/register", {
@@ -38,6 +41,14 @@ const SignupPage = () => {
     email: "",
     password: "",
   });
+
+
+  useEffect(() => {
+    if (session && session.user) {
+      window.location.replace(Backend_URL + "/home");
+    }
+  }, [])
+
   return (
     <div className="flex items-center justify-center">
       <div className="m-2 border w-6/12 rounded overflow-hidden shadow">
