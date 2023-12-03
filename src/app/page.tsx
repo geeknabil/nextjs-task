@@ -3,7 +3,7 @@ export default function Home() {
 
   return (
     <div>
-      <p>Hi, You Are Watching Sakura Dev Channel.</p>
+      <p>Tasks App</p>
     </div>
   );
 }
